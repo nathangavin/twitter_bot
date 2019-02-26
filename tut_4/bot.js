@@ -6,23 +6,46 @@ console.log("hello");
 // making a new Twit object
 let T = new Twit(config); // importing api keys from separate files
 
+//---------------------------------------------------------------------------------
 
 /**
- * get request to API
+ * GET request to API
  * prints the text of the tweets found
  */
 
-let params = { 
-    q: 'ESO', 
-    count: 2 
+let getParams = { 
+    q: 'nerdCubed',
+    lang: 'en', 
+    count: 10
 };
 
-function gotData(err, data, response) {
+function getData(err, data, response) {
     let tweets = data.statuses;
     for (let i = 0; i < tweets.length; i++) {
-        console.log(tweets[i].text);
+        //console.log(tweets[i].text);
     }
 };
 
-T.get('search/tweets', params, gotData);
+//T.get('search/tweets', getParams, getData);
 
+//---------------------------------------------------------------------------------
+
+/**
+ * POST request to API
+ */
+
+let tweet = {
+    // the status needs to be unique
+    status: '#codingrainbow following this tutorial' 
+};
+
+function tweeted(err, data, response) {
+    if (err) {
+        console.log("Something went wrong");
+        // do error log
+    } else {
+        console.log("It worked!!");
+    }
+};
+
+T.post('statuses/update', tweet, tweeted);
