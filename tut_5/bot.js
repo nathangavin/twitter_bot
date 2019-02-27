@@ -34,18 +34,30 @@ function getData(err, data, response) {
  * POST request to API
  */
 
-let tweet = {
-    // the status needs to be unique
-    status: '#codingrainbow following this tutorial' 
-};
+// making a random number bot
 
-function tweeted(err, data, response) {
-    if (err) {
-        console.log("Something went wrong");
-        // do error log
-    } else {
-        console.log("It worked!!");
-    }
-};
+// run function every 20000ms
+tweetIt();
+setInterval(tweetIt, 1000 * 20);
 
-T.post('statuses/update', tweet, tweeted);
+
+
+function tweetIt() {
+    let r = Math.floor(Math.random() * 10000);
+
+    let tweet = {
+        status: 'here is a random number: ' + r 
+    };
+    
+    function tweeted(err, data, response) {
+        if (err) {
+            console.log("Something went wrong");
+            // do error log
+        } else {
+            console.log("It worked!!");
+        }
+    };
+    
+    T.post('statuses/update', tweet, tweeted);
+}
+
